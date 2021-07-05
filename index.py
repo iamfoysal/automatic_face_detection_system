@@ -1,4 +1,5 @@
 import cv2
+import datetime
 
 cap = cv2.VideoCapture(0)
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
@@ -16,8 +17,10 @@ while True:
 
         for x1, y1, w1, h1 in smile:
             cv2.rectangle(face_dect, (x1, y1), (x1+w1, y1+h1), (0, 0, 114),2)
-            cv2.imwrite('img1.png',main_frame)
-    cv2.imshow('cam pondit', frame)
-    if cv2.waitKey(10) == repr('q'):
+            time_stamp= datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
+            file_name = f'img{time_stamp}.png'
+            cv2.imwrite(file_name,main_frame)
+    cv2.imshow('Digital Camera', frame)
+    if cv2.waitKey(10) == ord('q'):
         break
 
